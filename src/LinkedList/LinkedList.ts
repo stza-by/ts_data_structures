@@ -65,6 +65,16 @@ export class LinkedList<T> {
         return this;
     }
 
+    toArray(): T[] {
+        const array: T[] = [];
+        
+        for (let current = this.head; current !== null; current = current.next) {
+            array.push(current.data);
+        }
+
+        return array;
+    }
+
     toString(): string {
         if (!this.head) {
             return 'Empty';
