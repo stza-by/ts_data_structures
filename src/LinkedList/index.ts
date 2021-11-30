@@ -16,6 +16,9 @@ deepStrictEqual(list.toArray(), [1, 10, 20, 30]);
 list.deleteWithValue(20);
 deepStrictEqual(list.toArray(), [1, 10, 30]);
 
+list.deleteHead();
+deepStrictEqual(list.toArray(), [10, 30]);
+
 console.log('Doubly Linked List');
 
 const doublyLinkedList = new DoublyLinkedList((str1: string, str2: string) => str1 === str2);

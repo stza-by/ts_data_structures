@@ -7,6 +7,8 @@ interface ILinkedListNode<T> {
     data: T;
 }
 
+const defaultComparator: Comparator<unknown> = (a, b) => Object.is(a, b);
+
 class Node<T> implements ILinkedListNode<T> {
     next: Node<T> | null = null;
 
@@ -21,7 +23,11 @@ class Node<T> implements ILinkedListNode<T> {
 export class LinkedList<T> {
     protected head: Node<T> | null = null;
 
-    constructor(public comparator: Comparator<T>) {
+    constructor(public comparator: Comparator<T> = defaultComparator) {
+    }
+
+    isEmpty() {
+        return !this.head;
     }
 
     append(data: T): LinkedList<T> {
@@ -65,9 +71,21 @@ export class LinkedList<T> {
         return this;
     }
 
+    getHeadValue(): T | null {
+        return this.head ? this.head.data : null;
+    }
+
+    deleteHead(): LinkedList<T> {
+        if (this.head) {
+            this.head = this.head.next;
+        }
+
+        return this;
+    }
+
     toArray(): T[] {
         const array: T[] = [];
-        
+
         for (let current = this.head; current !== null; current = current.next) {
             array.push(current.data);
         }
@@ -90,6 +108,5 @@ export class LinkedList<T> {
 
         return str;
     }
-
 }
 
